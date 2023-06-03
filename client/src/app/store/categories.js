@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import categoriesService from "../services/categories.service";
 
 const categoriesSlice = createSlice({
     name: "categories",
@@ -24,5 +25,15 @@ const categoriesSlice = createSlice({
 
 const { reducer: categoriesReducer, actions } = categoriesSlice;
 const { categoriesRequested, categoriesReceved, categoriesRequestFiled } = actions;
+
+export const loadCategoriesList = () => async (dispatch) => {
+        dispatch(categoriesRequested());
+        try {
+            const { content } = await categoriesService.fetchAll();
+            dispatch(categoriesReceved(content));
+        } catch (error) {
+            dispatch(categoriesRequestFiled(error.message));
+        }
+};
 
 export default categoriesReducer;
