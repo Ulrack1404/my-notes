@@ -5,7 +5,7 @@ const chalk = require("chalk");
 const cors = require("cors");
 const path = require("path");
 const initDatabase = require("./startUp/initDatabase");
-
+const routes = require("./routes");
 
 const app = express();
 app.use(express.json());
@@ -42,4 +42,3 @@ async function start() {
     }
 }
 start();
-
